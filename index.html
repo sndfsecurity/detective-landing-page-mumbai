@@ -254,9 +254,8 @@ best detective agency in mumbai ">
                 <h2 class="section-title" style="margin-bottom: 1rem;">Contact Us</h2>
                 <p style="text-align: center; color: #9ca3af; margin-bottom: 2rem;">We'll respond within 30 minutes. 100% confidential.</p>
                 
-                <!-- <form id="contactForm" class="contact-form"> -->
-                    <form id="contactForm" class="contact-form" action="https://formsubmit.co/detectiveenquiry@gmail.com" method="POST">
-                    <!-- Name and Mobile in one row - Both Required -->
+     <form id="contactForm" class="contact-form">
+       
                     <div class="form-row">
 
                         <div class="form-group">
@@ -304,13 +303,13 @@ best detective agency in mumbai ">
                 
                 </div>
 
-                   <input type="hidden" name="_subject" value="🚨 New Detective Enquiry">
+                   <!-- <input type="hidden" name="_subject" value="🚨 New Detective Enquiry">
 
                     <input type="hidden" name="_template" value="table">
 
                     <input type="hidden" name="_next" value="https://detectiveinvestigation.in/thankyou.html">
 
-                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_captcha" value="false"> -->
 
                 </form>
                 
@@ -383,6 +382,68 @@ best detective agency in mumbai ">
    "addressCountry": "India"
  }
 }
+</script>
+
+
+
+<script>
+document
+.getElementById("contactForm")
+.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const data = {
+
+        fullName:
+            document.getElementById("name").value,
+
+        mobileNumber:
+            document.getElementById("phone").value,
+
+        service:
+            document.getElementById("service").value,
+
+        sourceWebsite:
+            window.location.hostname.replace("www.", ""),
+
+        status:
+            "NEW"
+    };
+
+    try {
+
+        const response = await fetch(
+            "https://centralized-enquiry-backend-production.up.railway.app/api/enquiry",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
+
+        if (response.ok) {
+
+            alert("Enquiry Submitted Successfully");
+
+            window.location.href =
+                "https://mumbai.detectiveinvestigation.in//thankyou.html";
+        }
+        else {
+
+            alert("Failed to submit enquiry");
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Something went wrong");
+    }
+
+});
 </script>
 
 </body>
